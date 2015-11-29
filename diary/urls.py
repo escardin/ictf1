@@ -8,6 +8,8 @@ urlpatterns = [
     url(r'^entries/(?P<pk>[0-9]+)$', views.EntryDetail.as_view()),
     url(r'^users/$', views.UserList.as_view()),
     url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
+    url(r'^register/$', views.UserView.as_view({'post': 'create'})),
+    url(r'^login/$', views.LoginView.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
