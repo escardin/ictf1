@@ -5,10 +5,13 @@ from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.response import Response
 from .permissions import IsOwner
+from django.conf import settings
+
 
 class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer2
     model = User
+
 
 class LoginView(views.APIView):
     def post(self, request, format=None):
@@ -21,6 +24,11 @@ class LoginView(views.APIView):
             response_data = {'token': token}
             return Response(response_data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class PublicKeyView(views.APIView):
+    def get(self, request, format=None):
+        return Response({"public_key":settings.JWT_PUBLIC_KEY.decode()})
 
 
 class EntryList(generics.ListCreateAPIView):

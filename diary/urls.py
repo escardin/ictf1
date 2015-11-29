@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
     url(r'^register/$', views.UserView.as_view({'post': 'create'})),
     url(r'^login/$', views.LoginView.as_view()),
+    url(r'^public_key/$', views.PublicKeyView.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
