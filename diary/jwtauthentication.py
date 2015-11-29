@@ -54,7 +54,7 @@ class JWTAuthentication(authentication.BaseAuthentication):
 
     @staticmethod
     def verify_hs256(to_check, signature, secret):
-        if hmac.new(secret, to_check + b'.' + secret, hashlib.sha256) == signature:
+        if hmac.new(secret, to_check + b'.' + secret, hashlib.sha256()) == signature:
             return True
         raise exceptions.AuthenticationFailed('Signature verification failed')
 

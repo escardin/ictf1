@@ -1,22 +1,14 @@
 from diary.models import Entry
-from diary.serializers import EntrySerializer, UserSerializer, UserSerializer2, LoginSerializer
+from diary.serializers import EntrySerializer, UserSerializer, UserSerializer2, LoginSerializer, EntryListSerializer
 from rest_framework import generics, permissions, viewsets, views
 from django.contrib.auth.models import User
-from rest_framework.permissions import AllowAny
-from .permissions import IsStaffOrTargetUser
 from rest_framework import status
 from rest_framework.response import Response
-
+from .permissions import IsOwner
 
 class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer2
     model = User
-
-    def get_permissions(self):
-        # allow non-authenticated user to create via POST
-        return (AllowAny() if self.request.method == 'POST' or self.request.metnod == 'GET'
-                else IsStaffOrTargetUser()),
-
 
 class LoginView(views.APIView):
     def post(self, request, format=None):
@@ -33,8 +25,8 @@ class LoginView(views.APIView):
 
 class EntryList(generics.ListCreateAPIView):
     queryset = Entry.objects.all()
-    serializer_class = EntrySerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    serializer_class = EntryListSerializer
+    permission_classes = (permissions.IsAuthenticated,)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -43,7 +35,7 @@ class EntryList(generics.ListCreateAPIView):
 class EntryDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Entry.objects.all()
     serializer_class = EntrySerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsOwner,)
 
 
 class UserList(generics.ListAPIView):

@@ -15,11 +15,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Entry',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('title', models.CharField(default='', blank=True, max_length=100)),
                 ('entry', models.TextField()),
-                ('owner', models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name='entries')),
+                ('hash', models.TextField()),
+                ('owner', models.ForeignKey(related_name='entries', to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]

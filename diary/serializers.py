@@ -10,7 +10,17 @@ class EntrySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Entry
-        fields = ('id', 'title', 'entry', 'owner')
+        fields = ('id', 'title', 'entry', 'owner', 'hash', 'created')
+
+
+class EntryListSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+
+    class Meta:
+        model = Entry
+        fields = ('id', 'title', 'owner', 'hash', 'entry', 'created')
+        read_only_fields = ('hash', 'created')
+        extra_kwargs = {'entry': {'write_only': True}}
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -25,7 +35,7 @@ class UserSerializer2(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password',)
-        write_only_fields = ('password',)
+        extra_kwargs = {'password': {'write_only': True}}
         read_only_fields = ('is_staff', 'is_superuser', 'is_active', 'date_joined',)
 
     def create(self, validated_data):
