@@ -154,7 +154,7 @@ if is_static:
 def run_from_xinetd(application):
     logger.debug("run_from_xinetd()")
     environ = dict(os.environ.items())
-    environ['wsgi.input'] = BytesIO(request_body)
+    environ['wsgi.input'] = BytesIO(request_body.encode())
     environ['wsgi.errors'] = sys.stderr
     environ['wsgi.version'] = (1, 0)
     environ['wsgi.multithread'] = False
@@ -192,7 +192,7 @@ def run_from_xinetd(application):
             try:
                 if headers_sent:
                     # Re-raise original exception if headers sent
-                    raise Exception(exc_info[0], exc_info[1], exc_info[2])
+                    raise Exception(str(exc_info[0]), str(exc_info[1]), str(exc_info[2]))
             finally:
                 exc_info = None  # avoid dangling circular ref
         elif headers_set:
