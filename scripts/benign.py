@@ -1,12 +1,12 @@
-from Crypto import Random
+from os import urandom
 import binascii
 from util import *
 
 
 def benign(ip, port):
     base_url = 'http://' + ip + ':' + port + '/'
-    username = (binascii.hexlify(Random.get_random_bytes(10))).decode()
-    password = (binascii.hexlify(Random.get_random_bytes(10))).decode()
+    username = (binascii.hexlify(urandom(10))).decode()
+    password = (binascii.hexlify(urandom(10))).decode()
 
     # register account
     account = create_account(base_url, username, password)

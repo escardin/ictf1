@@ -1,6 +1,7 @@
 service_name: hacker_diary
-type: web
+type: console
 description: Keeps a private log of how your exploits work, with timestamps and hashes you can share, so you can prove you exploited something without sharing how
 flag_id_description: A flag_id is an entry id which corresponds to a detailed, prehashed description of an exploit. http://<hostname>:<port>/entries/<flag_id> should yield an entry with the flag
-apt_dependencies:
+apt_dependencies: python3-pip libapache2-mod-wsgi build-essential libssl-dev libffi-dev python3-dev
 pip_dependencies: django djangorestframework cryptography
+architecture: x86_64

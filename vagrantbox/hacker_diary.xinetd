@@ -1,0 +1,11 @@
+{
+    socket_type = stream
+    protocol = tcp
+    wait = no
+    user = ctf_hacker_diary
+    bind = 0.0.0.0
+    server = /opt/ctf/hacker_diary/ro/wrapper.sh
+    port = 9800
+    type = UNLISTED
+    instances = 50
+}

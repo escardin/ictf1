@@ -19,9 +19,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '8=&^pk=dicf_=apph*q#qy_-evj2+%%mjy32w*6nyc_=rf6t)3'
-JWT_PUBLIC_KEY = open('auth.pub').read().encode()
-JWT_PRIVATE_KEY = open('auth.key').read().encode()
+SECRET_KEY = open('../rw/secret').read()
+JWT_PUBLIC_KEY = open('../rw/auth.pub').read().encode()
+JWT_PRIVATE_KEY = open('../rw/auth.key').read().encode()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'ictf1.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, '../rw/db.sqlite3'),
     }
 }
 
