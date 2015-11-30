@@ -2,7 +2,7 @@
 
 find ./ -name *.pyc -delete
 
-rm vagrantbox/{service,src,scripts,hacker_diary.tgz}
+rm vagrantbox/{build,hacker_diary.tgz}
 rm -rf build
 
 rm -rf **.pyc

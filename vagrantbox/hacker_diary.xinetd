@@ -1,3 +1,4 @@
+service hacker_diary
 {
     socket_type = stream
     protocol = tcp

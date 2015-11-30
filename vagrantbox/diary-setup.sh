@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -x
 # make user
 sudo useradd ctf_hacker_diary
 sudo mkdir -p /opt/ctf/hacker_diary/{rw,ro,www}
@@ -21,12 +20,14 @@ sudo chmod -R 755 /opt/ctf/
 sudo chmod -R 750 /opt/ctf/*/{ro,www}
 sudo chmod -R 770 /opt/ctf/*/rw
 
+cd ..
 # copy apache config
 sudo cp hacker_diary.conf /etc/apache2/sites-enabled/hacker_diary.conf
 
 #copy xinetd config
-sudo cp hacker_diary.xinetd /etc/xinetd.d/hacker_diary.xinetd
-sudo echo 'hacker_diary.xinetd 9800/tcp' >>/etc/services
+sudo cp hacker_diary.xinetd /etc/xinetd.d/hacker_diary
+
+sudo echo 'hacker_diary 9800/tcp' >>/etc/services
 sudo cp wrapper.sh /opt/ctf/hacker_diary/ro/wrapper.sh
 sudo service xinetd restart
 
@@ -37,7 +38,7 @@ sudo apt-get install -y python3-pip libapache2-mod-wsgi build-essential libssl-d
 cd /opt/ctf/hacker_diary
 
 # install required pip packages locally
-#sudo pip3 install -t /opt/ctf/hacker_diary/.local django djangorestframework cryptography
+sudo pip3 install django djangorestframework cryptography
 
 # run postinstall
 cd ro
