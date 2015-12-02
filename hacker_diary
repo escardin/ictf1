@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 """
 Script to deploy Django using xinetd.
 based on: http://ekazanov.github.io/django-xinetd/

@@ -3,6 +3,7 @@
 sudo useradd ctf_hacker_diary
 sudo mkdir -p /opt/ctf/hacker_diary/{rw,ro,www}
 
+cd /vagrant
 mkdir build
 cd build
 tar -xzf ../hacker_diary.tgz
@@ -32,17 +33,17 @@ sudo cp wrapper.sh /opt/ctf/hacker_diary/ro/wrapper.sh
 sudo service xinetd restart
 
 # install required debian packages
-sudo apt-get install -y python3-pip libapache2-mod-wsgi build-essential libssl-dev libffi-dev python3-dev
+sudo apt-get install -y build-essential libssl-dev libffi-dev python-dev
 
 # switch to run directory
 cd /opt/ctf/hacker_diary
 
 # install required pip packages locally
-sudo pip3 install django djangorestframework cryptography
+sudo pip install django djangorestframework cryptography
 
 # run postinstall
-cd ro
-sudo -u ctf_hacker_diary ./postinst
+cd rw
+sudo -u ctf_hacker_diary ../ro/postinst
 
 
 

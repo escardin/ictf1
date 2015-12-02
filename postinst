@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-python3 setup.py
-python3 manage.py migrate
+cd ../ro
+python setup.py
+python manage.py migrate
 
 rm setup.py

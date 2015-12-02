@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-mkdir -p build/{src,scripts,service/{ro,rw,www}}
+mkdir -p build/{src,scripts,service/{ro,rw}}
 #info file
 cp info.yaml build
 
@@ -14,12 +14,12 @@ cp -a -t build/scripts scripts/*
 cp -a -t build/service/ro postinst setup.py manage.py diary ictf1 hacker_diary
 
 #setup service/www folder
-cp -a -t build/service/www postinst setup.py manage.py diary ictf1
+#cp -a -t build/service/www postinst setup.py manage.py diary ictf1
 
 #setup service/rw folder
 cd build/service/ro
-python3 setup.py
-python3 manage.py migrate
+python setup.py
+python manage.py migrate
 cd ../../..
 
 #tarball it all
