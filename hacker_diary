@@ -8,7 +8,7 @@ import mimetypes
 import logging
 import logging.handlers
 from io import BytesIO
-from django.utils import importlib
+import importlib
 from django.core.wsgi import get_wsgi_application
 
 DOCUMENT_ROOT = "/path_to_your_project/insert_your_project_name_here/static/documentroot"
