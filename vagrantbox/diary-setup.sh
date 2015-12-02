@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # make user
-sudo useradd ctf_hacker_diary
+sudo useradd ctf_hacker_diary -d /opt/ctf/hacker_diary
 sudo mkdir -p /opt/ctf/hacker_diary/{rw,ro,www}
 
 cd /vagrant
@@ -39,7 +39,7 @@ sudo apt-get install -y build-essential libssl-dev libffi-dev python-dev
 cd /opt/ctf/hacker_diary
 
 # install required pip packages locally
-sudo -H -u ctf_hacker_diary pip install django==1.8 djangorestframework cryptography
+sudo -H -u ctf_hacker_diary pip install --user django==1.8 djangorestframework cryptography
 
 # run postinstall
 cd rw
