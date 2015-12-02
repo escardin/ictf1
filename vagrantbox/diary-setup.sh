@@ -39,7 +39,7 @@ sudo apt-get install -y build-essential libssl-dev libffi-dev python-dev
 cd /opt/ctf/hacker_diary
 
 # install required pip packages locally
-sudo pip install django djangorestframework cryptography
+sudo -H -u ctf_hacker_diary pip install django==1.8 djangorestframework cryptography
 
 # run postinstall
 cd rw

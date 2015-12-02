@@ -12,7 +12,8 @@ def create_account(base_url, username, password):
         'password': password
     }
     # create account
-    response = requests.post(base_url + 'register/', json=credentials)
+    response = requests.post(base_url + 'register/', data=json.dumps(credentials),
+                             headers={'Content-Type': 'application/json'})
     if response.status_code != requests.codes.created:
         response.raise_for_status()
     return response.json()
@@ -23,7 +24,8 @@ def login(base_url, username, password):
         'username': username,
         'password': password
     }
-    response = requests.post(base_url + 'login/', json=credentials)
+    response = requests.post(base_url + 'login/', data=json.dumps(credentials),
+                             headers={'Content-Type': 'application/json'})
     if response.status_code != requests.codes.ok:
         response.raise_for_status()
     return response.json()
@@ -31,9 +33,10 @@ def login(base_url, username, password):
 
 def post_entry(base_url, jwt_token, entry):
     headers = {
-        'Authorization': 'JWT ' + jwt_token
+        'Authorization': 'JWT ' + jwt_token,
+        'Content-Type': 'application/json'
     }
-    response = requests.post(base_url + 'entries/', headers=headers, json=entry)
+    response = requests.post(base_url + 'entries/', headers=headers, data=json.dumps(entry))
     if response.status_code != requests.codes.created:
         response.raise_for_status()
     return response.json()
@@ -56,12 +59,12 @@ def verify_token(jwt_token, public_key, account):
     if body_decoded['username'] != account['username']:
         raise Exception('JWT token payload has the wrong username!')
 
-    #
-    # key = RSA.importKey(public_key)
-    # message = HMAC.new(public_key.encode(), (header + '.' + body).encode(), SHA256)
-    # verifier = PKCS1_v1_5.new(key)
-    # if not verifier.verify(message, signature):
-    #     raise Exception('JWT token signature failed to match public key!')
+        #
+        # key = RSA.importKey(public_key)
+        # message = HMAC.new(public_key.encode(), (header + '.' + body).encode(), SHA256)
+        # verifier = PKCS1_v1_5.new(key)
+        # if not verifier.verify(message, signature):
+        #     raise Exception('JWT token signature failed to match public key!')
 
 
 def get_entry(base_url, jwt_token, entry_id):
