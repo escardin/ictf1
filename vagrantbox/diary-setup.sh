@@ -43,7 +43,7 @@ sudo -H -u ctf_hacker_diary pip install --user django==1.8 djangorestframework c
 
 # run postinstall
 cd rw
-sudo -u ctf_hacker_diary ../ro/postinst
+sudo -H -u ctf_hacker_diary ../ro/postinst
 
 
 

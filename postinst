@@ -3,5 +3,3 @@
 cd ../ro
 python setup.py
 python manage.py migrate
-
-rm setup.py
