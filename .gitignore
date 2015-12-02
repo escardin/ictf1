@@ -1,0 +1,5 @@
+.idea
+*.iml
+vagrantbox/.vagrant
+vagrantbox/build
+build
