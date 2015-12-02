@@ -4,7 +4,7 @@ from util import *
 
 
 def benign(ip, port):
-    base_url = 'http://' + ip + ':' + port + '/'
+    base_url = 'http://' + ip + ':' + str(port) + '/'
     username = (binascii.hexlify(urandom(10))).decode()
     password = (binascii.hexlify(urandom(10))).decode()
 

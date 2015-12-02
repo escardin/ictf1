@@ -4,7 +4,7 @@ from util import *
 
 
 def set_flag(ip, port, flag):
-    base_url = 'http://' + ip + ':' + port + '/'
+    base_url = 'http://' + ip + ':' + str(port) + '/'
     username = (binascii.hexlify(Random.get_random_bytes(10))).decode()
     password = (binascii.hexlify(Random.get_random_bytes(10))).decode()
 
